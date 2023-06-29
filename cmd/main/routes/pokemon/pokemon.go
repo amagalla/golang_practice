@@ -17,8 +17,8 @@ type Pokemon struct {
 }
 
 func GetPokemonList(c *gin.Context) {
-	// Make the HTTP GET request to the URL
 	resp, err := http.Get("https://pokeapi.co/api/v2/pokemon/")
+
 	if err != nil {
 		c.AbortWithStatusJSON(500, gin.H{
 			"Error": "Internal Error",
@@ -27,7 +27,6 @@ func GetPokemonList(c *gin.Context) {
 	}
 	defer resp.Body.Close()
 
-	// Check the response status code
 	if resp.StatusCode != http.StatusOK {
 		c.AbortWithStatusJSON(400, gin.H{
 			"Error": "Failed to retrieve Pokemon",
@@ -35,7 +34,6 @@ func GetPokemonList(c *gin.Context) {
 		return
 	}
 
-	// Decode the response body into a struct
 	var pokemonListResponse PokemonListResponse
 	err = json.NewDecoder(resp.Body).Decode(&pokemonListResponse)
 	if err != nil {
@@ -46,7 +44,6 @@ func GetPokemonList(c *gin.Context) {
 		return
 	}
 
-	// Return the Pokemon list as JSON
 	c.JSON(http.StatusOK, gin.H{
 		"pokemonList": pokemonListResponse.PokemonList,
 	})

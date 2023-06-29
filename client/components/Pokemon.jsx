@@ -30,7 +30,7 @@ const Pokemon = () => {
   return (
     <>
       <div className="pokemon-button">
-        <button onClick={pokemonHandleClick}>Pokemon</button>
+        <button onClick={pokemonHandleClick}>Click for Pokemon</button>
       </div>
       {isVisible && (
         <div className="pokemon-container">{pokemonListOutput}</div>

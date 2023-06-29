@@ -1,7 +1,7 @@
 package main
 
 import (
-	"golang_practice/cmd/main/routes/pokemon"
+	"golang_practice/cmd/main/routes"
 	"golang_practice/pckg/db"
 	"os"
 
@@ -10,19 +10,15 @@ import (
 )
 
 func main() {
-
-	// mysql connection
 	db.InitDB()
 
 	router := gin.Default()
 
 	router.Use(cors.Default())
 
-	// Set trusted proxy
 	router.SetTrustedProxies([]string{"127.0.0.1"})
 
-	// Import routes
-	router.GET("/pokemon", pokemon.GetPokemonList)
+	routes.RegisterRoutes(router)
 
 	port := os.Getenv("PORT")
 	if port == "" {
