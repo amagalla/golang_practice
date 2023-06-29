@@ -5,6 +5,7 @@ import (
 	"golang_practice/pckg/db"
 	"os"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,6 +15,8 @@ func main() {
 	db.InitDB()
 
 	router := gin.Default()
+
+	router.Use(cors.Default())
 
 	// Set trusted proxy
 	router.SetTrustedProxies([]string{"127.0.0.1"})

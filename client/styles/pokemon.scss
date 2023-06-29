@@ -1,0 +1,17 @@
+.pokemon-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.pokemon-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pokemon-names {
+  margin: 10px auto;
+  padding: 10px;
+}
