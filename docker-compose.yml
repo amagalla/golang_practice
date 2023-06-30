@@ -32,9 +32,9 @@ services:
     environment:
       DB_HOST: mysql
       DB_PORT: 3306
-      DB_USER: "sample_database"
-      DB_PASSWORD: "sample"
-      DB_NAME: "sample_database"
+      DB_USER: "dr_stone"
+      DB_PASSWORD: "senku"
+      DB_NAME: "dr_stone"
       WAIT_HOSTS: mysql:3306
       WAIT_HOSTS_TIMEOUT: 100
       WAIT_SLEEP_INTERVAL: 10
@@ -52,14 +52,13 @@ services:
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=sample_database
-      - MYSQL_USER=sample_database
-      - MYSQL_PASSWORD=sample
+      - MYSQL_DATABASE=dr_stone
+      - MYSQL_USER=dr_stone
+      - MYSQL_PASSWORD=senku
     volumes:
-    - ./pckg/db/:/docker-entrypoint-initdb.d
+      - ./pckg/db/:/docker-entrypoint-initdb.d
     networks:
       - app
-
 
 networks:
   app:

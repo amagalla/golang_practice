@@ -12,11 +12,11 @@ var db *sql.DB
 
 func InitDB() {
 	cfg := mysql.Config{
-		User:                 "sample_database",
-		Passwd:               "sample",
+		User:                 "dr_stone",
+		Passwd:               "senku",
 		Net:                  "tcp",
 		Addr:                 "mysql:3306",
-		DBName:               "sample_database",
+		DBName:               "dr_stone",
 		AllowNativePasswords: true,
 	}
 
@@ -35,4 +35,8 @@ func InitDB() {
 	}
 
 	fmt.Println("Connected to mysql...")
+}
+
+func GetDB() *sql.DB {
+	return db
 }

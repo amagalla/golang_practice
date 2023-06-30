@@ -56,6 +56,6 @@ Navigate through mysql database
 
 ```bash
   make mysql
-  mysql -u sample_database -p
-  pasword: sample
+  mysql -u dr_stone -p
+  pasword: senku
 ```
