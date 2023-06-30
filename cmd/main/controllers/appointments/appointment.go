@@ -1,6 +1,9 @@
 package appointments
 
-import "golang_practice/pckg/db"
+import (
+	"golang_practice/cmd/main/structs"
+	"golang_practice/pckg/db"
+)
 
 func InsertPhysiciansData(firstName, lastName string) error {
 	db := db.GetDB()
@@ -22,13 +25,7 @@ func InsertPhysiciansData(firstName, lastName string) error {
 	return nil
 }
 
-type Physicians struct {
-	PhysicianID   uint64 `json:"physician_id"`
-	FirstName string `json:"physician_first_name"`
-	LastName string `json:"physician_last_name"`
-}
-
-func GetPhysiciansList() ([]Physicians, error) {
+func GetPhysiciansList() ([]structs.Physicians, error) {
 	db := db.GetDB()
 
 	rows, err := db.Query("SELECT * FROM physicians")
@@ -37,10 +34,10 @@ func GetPhysiciansList() ([]Physicians, error) {
 	}
 	defer rows.Close()
 
-	var physiciansList []Physicians
+	var physiciansList []structs.Physicians
 
 	for rows.Next() {
-		var physician Physicians
+		var physician structs.Physicians
 		if err := rows.Scan(&physician.PhysicianID, &physician.FirstName, &physician.LastName); err != nil {
 			return nil, err
 		}

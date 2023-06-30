@@ -2,19 +2,16 @@ package physicians
 
 import (
 	"golang_practice/cmd/main/controllers/appointments"
+	"golang_practice/cmd/main/structs"
 	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-var requestData struct {
-	PhysicianFirstName string `json:"physician_first_name"`
-	PhysicianLastName string `json:"physician_last_name"`
-}
-
-
 func InsertPhysicians (c *gin.Context) {
+	var requestData structs.InsertPhysiciansRequestData
+	
 	if err := c.ShouldBindJSON(&requestData); err != nil {
 		log.Println("Failed to parse request body: ", err)
 		c.JSON(400, gin.H{
@@ -39,10 +36,6 @@ func InsertPhysicians (c *gin.Context) {
 	})
 }
 
-type PhysicianListResponse struct {
-	PhysicianList []appointments.Physicians `json:"results"`
-}
-
 func GetPhysicians(c *gin.Context) {
 	physiciansList, err := appointments.GetPhysiciansList()
 	if err != nil {
@@ -50,7 +43,7 @@ func GetPhysicians(c *gin.Context) {
 		return
 	}
 
-	response := PhysicianListResponse{
+	response := structs.PhysicianListResponse{
 		PhysicianList: physiciansList,
 	}
 

@@ -2,21 +2,13 @@ package pokemon
 
 import (
 	"encoding/json"
+	"golang_practice/cmd/main/structs"
 	"math"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
-
-type PokemonListResponse struct {
-	PokemonList []Pokemon `json:"results"`
-}
-
-type Pokemon struct {
-	Name string `json:"name"`
-	URL  string `json:"url"`
-}
 
 func GetPokemonList(c *gin.Context) {
 
@@ -49,7 +41,7 @@ func GetPokemonList(c *gin.Context) {
 		return
 	}
 
-	var pokemonListResponse PokemonListResponse
+	var pokemonListResponse structs.PokemonListResponse
 	err = json.NewDecoder(resp.Body).Decode(&pokemonListResponse)
 	if err != nil {
 		c.AbortWithStatusJSON(400, gin.H{
@@ -66,7 +58,7 @@ func GetPokemonList(c *gin.Context) {
 
 	if startIndex >= len(pokemonListResponse.PokemonList) {
 		c.JSON(http.StatusOK, gin.H{
-			"pokemonList": []Pokemon{},
+			"pokemonList": []structs.Pokemon{},
 		})
 
 		return
