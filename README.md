@@ -1,30 +1,6 @@
-## Golang/Gin Docker Boilerplate
+## Golang/Gin Practice Application
 
-This is a sample boilerplate which includ Golang/Gin, Docker, and Makefile
-
-## Gin Install
-
-Install Gin
-
-```bash
-  go install github.com/gin-gonic/gin
-```
-
-Add Gin Path at end of file
-
-```bash
-  cd
-
-  code .zshrc
-
-  export PATH=$PATH:$HOME/go/bin
-```
-
-## Run Locally
-
-```bash
-  gin run main.go
-```
+This is just a practice application to lean Go
 
 ## Run Docker-Compose
 
