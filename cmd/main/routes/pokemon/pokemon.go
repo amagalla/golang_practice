@@ -2,7 +2,9 @@ package pokemon
 
 import (
 	"encoding/json"
+	"math"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,10 +15,23 @@ type PokemonListResponse struct {
 
 type Pokemon struct {
 	Name string `json:"name"`
-	URL string `json:"url"`
+	URL  string `json:"url"`
 }
 
 func GetPokemonList(c *gin.Context) {
+
+	page, err := strconv.Atoi(c.Query("page"))
+
+	if err != nil {
+		page = 1
+	}
+
+	page_size, err := strconv.Atoi(c.Query("page_size"))
+
+	if err != nil {
+		page_size = 1
+	}
+
 	resp, err := http.Get("https://pokeapi.co/api/v2/pokemon/")
 
 	if err != nil {
@@ -44,7 +59,27 @@ func GetPokemonList(c *gin.Context) {
 		return
 	}
 
+	totalPages := int(math.Ceil(float64(len(pokemonListResponse.PokemonList)) / float64(page_size)))
+
+	startIndex := (page - 1) * page_size
+	endIndex := startIndex + page_size
+
+	if startIndex >= len(pokemonListResponse.PokemonList) {
+		c.JSON(http.StatusOK, gin.H{
+			"pokemonList": []Pokemon{},
+		})
+
+		return
+	}
+
+	if endIndex > len(pokemonListResponse.PokemonList) {
+		endIndex = len(pokemonListResponse.PokemonList)
+	}
+
+	pokemonPage := pokemonListResponse.PokemonList[startIndex:endIndex]
+
 	c.JSON(http.StatusOK, gin.H{
-		"pokemonList": pokemonListResponse.PokemonList,
+		"pokemonList": pokemonPage,
+		"totalPages":  totalPages,
 	})
 }
