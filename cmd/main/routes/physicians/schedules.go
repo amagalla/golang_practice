@@ -46,7 +46,6 @@ type PhysicianListResponse struct {
 func GetPhysicians(c *gin.Context) {
 	physiciansList, err := appointments.GetPhysiciansList()
 	if err != nil {
-		// Handle the error, such as returning an error response
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve physicians"})
 		return
 	}
@@ -55,6 +54,5 @@ func GetPhysicians(c *gin.Context) {
 		PhysicianList: physiciansList,
 	}
 
-	// Return the response as JSON
 	c.JSON(http.StatusOK, response)
 }

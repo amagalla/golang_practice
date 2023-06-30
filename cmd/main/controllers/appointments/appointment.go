@@ -22,10 +22,6 @@ func InsertPhysiciansData(firstName, lastName string) error {
 	return nil
 }
 
-// type PhysicianListResponse struct {
-// 	PhysicianList []Physicians `json:"results"`
-// }
-
 type Physicians struct {
 	PhysicianID   uint64 `json:"physician_id"`
 	FirstName string `json:"physician_first_name"`
