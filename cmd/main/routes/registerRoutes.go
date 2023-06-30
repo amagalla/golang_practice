@@ -9,6 +9,7 @@ import (
 
 func RegisterRoutes(router *gin.Engine) {
 	router.GET("/pokemon", pokemon.GetPokemonList)
+	router.GET("/getPhysicians", physicians.GetPhysicians)
 
 	router.POST("/insertPhysicians", physicians.InsertPhysicians)
 }
