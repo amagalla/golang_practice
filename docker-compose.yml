@@ -25,6 +25,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: server
+    container_name: golang-container
     expose:
       - "3000"
     ports:
